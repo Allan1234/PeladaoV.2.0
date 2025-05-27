@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # codemagic.yaml
 # Documentação: https://docs.codemagic.io/yaml-basic-configuration/configuring-workflows/
 
@@ -20,10 +21,18 @@ workflows:
       # groups:
       #   - google_services # Grupo de variáveis criado na UI do Codemagic
 
+=======
+workflows:
+  android-release-build:
+    name: Android Release Build
+    environment:
+      flutter: stable
+>>>>>>> 5440c7f8c810c1278845962a67f64a00ea846c7c
     scripts:
       - name: Get Flutter packages
         script: |
           flutter packages pub get
+<<<<<<< HEAD
       # - name: Run Flutter tests (Opcional)
       #   script: |
       #     flutter test
@@ -53,3 +62,17 @@ workflows:
       # Opcional: Publicar em outros lugares (Google Play, etc.)
       # Veja a documentação do Codemagic para mais opções
 
+=======
+      - name: Build Android release APK
+        script: |
+          flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+    publishing:
+      email:
+        recipients:
+          - allangoncalves004@gmail.com
+        notify:
+          success: true
+          failure: true
+>>>>>>> 5440c7f8c810c1278845962a67f64a00ea846c7c
