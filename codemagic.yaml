@@ -1,0 +1,55 @@
+# codemagic.yaml
+# Documentação: https://docs.codemagic.io/yaml-basic-configuration/configuring-workflows/
+
+workflows:
+  android-release-build:
+    name: Android Release Build
+    # Disparador (triggering): pode ser configurado na UI do Codemagic
+    # Exemplo: disparar em push para a branch 'main'
+    # triggering:
+    #   events:
+    #     - push
+    #   branch_patterns:
+    #     - pattern: main
+    #       include: true
+
+    environment:
+      flutter: stable # Ou especifique uma versão: 3.19.0, etc.
+      # Adicione outras variáveis de ambiente se necessário
+      # Ex: para chaves de API
+      # groups:
+      #   - google_services # Grupo de variáveis criado na UI do Codemagic
+
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      # - name: Run Flutter tests (Opcional)
+      #   script: |
+      #     flutter test
+      #   test_report: build/test-results/*.xml # Se usar junit report
+
+      - name: Build Android release APK
+        script: |
+          # Navega para o diretório raiz do projeto Flutter dentro do clone
+          # O Codemagic clona o repositório, então o caminho pode variar
+          # Se o seu pubspec.yaml NÃO está na raiz do repositório, ajuste o cd
+          # Ex: Se estiver em uma pasta 'meu_app', use: cd meu_app
+          # Assumindo que pubspec.yaml está na raiz do repositório PeladaoV.2.0
+          flutter build apk --release
+
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      # Adicione outros artefatos se necessário
+
+    publishing:
+      # Opcional: Enviar email com o link do artefato
+      email:
+        recipients:
+          - seu_email@exemplo.com # Substitua pelo seu email
+        notify:
+          success: true
+          failure: true
+      # Opcional: Publicar em outros lugares (Google Play, etc.)
+      # Veja a documentação do Codemagic para mais opções
+
