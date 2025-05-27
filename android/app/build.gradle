@@ -1,28 +1,19 @@
 plugins {
     id "com.android.application"
     id "kotlin-android"
-    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
 }
 
 android {
     namespace "com.example.peladao"
-    compileSdkVersion 34
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.peladao"
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdk 21
+        targetSdk 34
         versionCode 1
         versionName "1.0"
-    }
-
-    signingConfigs {
-        release {
-            keyAlias 'peladao_alias'
-            keyPassword '123456'
-            storeFile file('peladao_keystore.jks')
-            storePassword '123456'
-        }
     }
 
     buildTypes {
@@ -40,16 +31,11 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        jvmTarget = '1.8'
     }
 }
 
-flutter {
-    source '../..'
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:32.2.3')
+    implementation 'com.google.firebase:firebase-analytics'
 }
-
-dependencies {}
