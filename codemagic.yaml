@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # codemagic.yaml
 # Documentação: https://docs.codemagic.io/yaml-basic-configuration/configuring-workflows/
 
@@ -15,24 +14,16 @@ workflows:
     #       include: true
 
     environment:
-      flutter: stable # Ou especifique uma versão: 3.19.0, etc.
+      flutter: stable # Ou especifique uma versão: "3.10.5", "3.19.6", etc.
       # Adicione outras variáveis de ambiente se necessário
       # Ex: para chaves de API
       # groups:
       #   - google_services # Grupo de variáveis criado na UI do Codemagic
 
-=======
-workflows:
-  android-release-build:
-    name: Android Release Build
-    environment:
-      flutter: stable
->>>>>>> 5440c7f8c810c1278845962a67f64a00ea846c7c
     scripts:
       - name: Get Flutter packages
         script: |
-          flutter packages pub get
-<<<<<<< HEAD
+          flutter pub get
       # - name: Run Flutter tests (Opcional)
       #   script: |
       #     flutter test
@@ -40,11 +31,7 @@ workflows:
 
       - name: Build Android release APK
         script: |
-          # Navega para o diretório raiz do projeto Flutter dentro do clone
-          # O Codemagic clona o repositório, então o caminho pode variar
-          # Se o seu pubspec.yaml NÃO está na raiz do repositório, ajuste o cd
-          # Ex: Se estiver em uma pasta 'meu_app', use: cd meu_app
-          # Assumindo que pubspec.yaml está na raiz do repositório PeladaoV.2.0
+          # Assumindo que pubspec.yaml está na raiz do repositório
           flutter build apk --release
 
     artifacts:
@@ -61,18 +48,3 @@ workflows:
           failure: true
       # Opcional: Publicar em outros lugares (Google Play, etc.)
       # Veja a documentação do Codemagic para mais opções
-
-=======
-      - name: Build Android release APK
-        script: |
-          flutter build apk --release
-    artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
-    publishing:
-      email:
-        recipients:
-          - allangoncalves004@gmail.com
-        notify:
-          success: true
-          failure: true
->>>>>>> 5440c7f8c810c1278845962a67f64a00ea846c7c
