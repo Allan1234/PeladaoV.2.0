@@ -1,26 +1,16 @@
 workflows:
-  android-release-build:
-    name: Android Release Build
-
+  android-workflow:
+    name: Build Android APK
     environment:
       flutter: stable
-
+      vars:
+        PACKAGE_NAME: "com.example.peladao"
     scripts:
-      - name: Get Flutter packages
+      - name: Get dependencies
         script: |
           flutter pub get
-
-      - name: Build Android release APK
+      - name: Build APK
         script: |
           flutter build apk --release
-
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
-
-    publishing:
-      email:
-        recipients:
-          - allangoncalves004@gmail.com
-        notify:
-          success: true
-          failure: true
