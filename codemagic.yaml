@@ -1,9 +1,12 @@
+# codemagic.yaml
+# Documentação: https://docs.codemagic.io/yaml-basic-configuration/configuring-workflows/
+
 workflows:
   android-release-build:
     name: Android Release Build
 
     environment:
-      flutter: stable
+      flutter: stable  # Ou especifique uma versão como "3.19.6"
 
     scripts:
       - name: Get Flutter packages
@@ -24,3 +27,4 @@ workflows:
         notify:
           success: true
           failure: true
+
